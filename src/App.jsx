@@ -21,10 +21,30 @@ export default function App() {
     }
   }
 
+  function removeFromCart(id) {
+    setCart(prevCart => prevCart.filter(guitar => guitar.id !== id))
+  }
+
+  function increaseQuantity (id){
+    const updatedCart = cart.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          quantity: item.quantity + 1
+        }
+      }
+      return item
+    })
+
+    setCart(updatedCart)
+  }
+
   return (
     <>
       <Header
         cart={cart}
+        removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
       />
 
       <main className="container-xl mt-5">
